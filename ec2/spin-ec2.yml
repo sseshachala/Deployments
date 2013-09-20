@@ -1,0 +1,12 @@
+- name: Spin Instance
+  hosts: local
+  connection: local
+  gather_facts: false
+
+  vars_files:
+    - "vars/amazon_creds.yml"
+
+  roles:
+    - create_group
+    - create_keypair
+    - spin_instance

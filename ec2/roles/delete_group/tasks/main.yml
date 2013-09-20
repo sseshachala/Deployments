@@ -1,0 +1,10 @@
+- name: Delete Security Group
+  local_action: 
+    module: ec2_group 
+    name: ${security_group}
+    ec2_access_key: ${aws_access_key}
+    ec2_secret_key: ${aws_secret_key} 
+    region: ${region} 
+    description: ${group_description} 
+    state: absent
+  register: group

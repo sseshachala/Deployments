@@ -1,0 +1,21 @@
+# It will be script generated file
+aws_access_key: AKIAIHWKTG3OH5CKQZ2Q
+aws_secret_key: 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
+region: us-east-1
+zone: us-east-1a
+keypair: ${region}_key  
+security_group: ${region}_test
+image: ami-3d4ff254
+group_description: "test_group"
+vol_size: 20
+instance_id: i-c37b5ca4
+instance_type: t1.micro
+rules:
+  - proto: tcp
+    from_port: 80
+    to_port: 80
+    cidr_ip: 0.0.0.0/0
+  - proto: tcp
+    from_port: 22
+    to_port: 22
+    cidr_ip: 0.0.0.0/0

@@ -1,0 +1,9 @@
+- name: Create Volume
+  local_action: 
+    module: ec2_vol 
+    ec2_access_key: ${aws_access_key}
+    ec2_secret_key: ${aws_secret_key} 
+    region: ${region} 
+    volume_size: ${vol_size}
+    zone: ${zone}
+  register: volume

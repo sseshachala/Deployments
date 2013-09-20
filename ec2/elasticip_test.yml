@@ -1,0 +1,11 @@
+- name: Create Ip
+  hosts: local
+  connection: local
+  gather_facts: false
+
+  vars_files:
+    - "vars/amazon_creds.yml"
+
+  roles:
+    - create_elastic_ip
+

@@ -1,0 +1,13 @@
+- name: Create and Delete Security Group
+  hosts: local
+  connection: local
+  gather_facts: false
+
+  vars_files:
+    - "vars/amazon_creds.yml"
+
+  roles:
+    - create_group
+    - delete_group
+
+  

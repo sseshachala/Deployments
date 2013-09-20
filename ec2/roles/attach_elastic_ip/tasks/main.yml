@@ -1,0 +1,9 @@
+- name: Create Elastic Ip
+  local_action: 
+    module: ec2_elasticip 
+    state: attach
+    instance_id: ${instance_id}
+    ec2_access_key: ${aws_access_key}
+    ec2_secret_key: ${aws_secret_key} 
+    region: ${region} 
+  register: ip

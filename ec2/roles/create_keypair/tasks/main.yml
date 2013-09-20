@@ -1,0 +1,3 @@
+- name: Create keypair
+  local_action: ec2_keypair aws_access_key={{aws_access_key}} aws_secret_key={{aws_secret_key}} keypair={{keypair}} region={{region}}
+  register: key
