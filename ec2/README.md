@@ -21,7 +21,7 @@ Inventory (test host group) file is [dev.inventory](dev.inventory)
 Testing
 =======
 
-All yml files stored in root of this directory are tests and can be run using as exampl:
+All yml files stored in root of this directory are tests and can be run using as example:
 
 ```
 ansible-playbook -i dev.inventory group_test.yml

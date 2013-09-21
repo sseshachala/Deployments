@@ -10,3 +10,17 @@
     - create_group
     - create_keypair
     - spin_instance
+
+- name: Remove Instance
+  hosts: local
+  connection: local
+  gather_facts: false
+
+  vars_files:
+    - "vars/amazon_creds.yml"
+
+  roles:
+    - delete_instance
+
+  pre_tasks:
+    - debug: msg="ec2 info {{ ec2.instance_ids }}."
