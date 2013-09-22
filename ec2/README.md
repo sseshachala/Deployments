@@ -1,3 +1,11 @@
+Install
+=======
+
+There is boto requirements for this tasks. In order to install run
+```
+pip install boto
+```
+
 Ec2 tasks
 =========
 
