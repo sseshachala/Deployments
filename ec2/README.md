@@ -1,6 +1,8 @@
 Install
 =======
 
+You need xervmon version of ansible installed as described in [README](../README.md)
+
 There is boto requirements for this tasks. In order to install run
 ```
 pip install boto
@@ -8,8 +10,6 @@ pip install boto
 
 Ec2 tasks
 =========
-
-You need xervmon version of ansible installed as described in [README](../README.md)
 
 
 All tasks are stored in roles. You can run test using:
