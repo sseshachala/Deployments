@@ -1,0 +1,9 @@
+---
+
+omd_user: omd
+omd_user_folder: /omd
+
+dbpassword: mysqlroot
+
+carbon_server: 10.204.54.80
+carbon_port: 2004

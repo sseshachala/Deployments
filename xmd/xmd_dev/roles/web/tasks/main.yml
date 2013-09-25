@@ -1,0 +1,16 @@
+---
+- name: Install Apache webserver
+  apt: pkg={{ item }}
+  with-items:
+    - apache2.2-common
+    - apache2
+
+- name: Install Php
+  apt: pkg={{ item }}
+  with-items:
+    - php-pear
+    - php5-sqlite
+    - php5-mcrypt 
+    - php5-gd 
+    - php5-cgi 
+    - php5-cli

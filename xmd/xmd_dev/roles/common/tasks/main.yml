@@ -1,0 +1,46 @@
+---
+- name: Update apt cache and make safe-upgrade
+  apt: update_cache=yes upgrade=safe
+
+- name: Install git
+  apt: pkg=git
+
+- name: Install Various libs
+  apt: pkg={{ item }}
+  with-items:
+    - wget
+    - libsnmp-perl 
+    - libreadline5 
+    - libperl5.14 
+    - libpango1.0-0 
+    - libxpm4 
+    - libjpeg8 
+    - libfontconfig1 
+    - patch 
+    - python-ldap 
+    - libxmu6 
+    - libxaw7 
+    - libgvpr1 
+    - libgvc5 
+    - libgraph4 
+    - libcgraph5 
+    - libcdt4 
+    - libxt6 
+    - xvfb 
+    - snmp 
+    - smbclient 
+    - pyro 
+    - dialog 
+    - fping 
+    - graphviz 
+    - libapache2-mod-fcgid 
+    - libapache2-mod-proxy-html 
+    - libboost-program-options1.49.0  
+    - libdbi1 
+    - libevent-1.4-2 
+    - libgd2-xpm 
+    - libltdl7 
+    - libnet-snmp-perl 
+    - python-paramiko 
+    - libapache2-mod-python
+

@@ -1,0 +1,11 @@
+---
+- name: Install mysql package
+  apt: pkg={{ item }}
+  with_items:
+    - mysql-server
+
+- name: Start mysql Service
+  service: name=mysqld state=started enabled=true
+
+- name: Update mysql root password
+  mysql_user: name=root password={{dbpassword}}
