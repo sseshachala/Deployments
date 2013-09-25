@@ -1,0 +1,6 @@
+- hosts: localhost
+  gather_facts: False
+  vars_files:
+    - vars/rackspace_creds.yml
+  roles:
+    - common-cli

@@ -1,0 +1,22 @@
+- name: Server build request
+  local_action:
+    module: rax
+    name: '{{ item.name }}'
+    flavor: '{{ item.flavor }}'
+    image: '{{ item.image }}'
+    region: '{{ item.region }}'
+    api_key: '{{ api_key }}'
+    username: '{{ username }}'
+  with_items: servers_enabled
+
+- name: Server build request
+  local_action:
+    module: rax
+    name: '{{ item.name }}'
+    flavor: '{{ item.flavor }}'
+    image: '{{ item.image }}'
+    region: '{{ item.region }}'
+    api_key: '{{ api_key }}'
+    username: '{{ username }}'
+    state: deleted
+  with_items: servers_deleted

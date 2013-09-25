@@ -1,0 +1,8 @@
+- hosts: localhost
+  gather_facts: False
+  vars_files:
+    - vars/rackspace_creds.yml
+    - vars/servers_enabled.yml
+    - vars/servers_deleted.yml
+  roles:
+    - common-vars

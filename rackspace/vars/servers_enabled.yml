@@ -1,0 +1,13 @@
+servers_enabled:
+  - {
+      name: "raxtest1",
+      flavor: "2",
+      image: "d919d2a7-5a39-48a3-be49-8c808ab4ad23",
+      region: "DFW"
+    }
+  - {
+      name: "raxtest2",
+      flavor: "2",
+      image: "d919d2a7-5a39-48a3-be49-8c808ab4ad23",
+      region: "DFW"
+    }
