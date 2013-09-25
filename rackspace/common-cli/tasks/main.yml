@@ -1,0 +1,10 @@
+- name: Server request
+  local_action:
+    module: rax
+    name: '{{ name }}'
+    flavor: '{{ flavor }}'
+    image: '{{ image }}'
+    region: '{{ region }}'
+    api_key: '{{ api_key }}'
+    username: '{{ username }}'
+    state: '{{ state }}'
