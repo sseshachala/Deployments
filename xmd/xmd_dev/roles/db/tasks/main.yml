@@ -3,9 +3,10 @@
   apt: pkg={{ item }}
   with_items:
     - mysql-server
+    - python-mysqldb
 
 - name: Start mysql Service
-  service: name=mysqld state=started enabled=true
+  service: name=mysql state=started enabled=true
 
 - name: Update mysql root password
-  mysql_user: name=root password={{dbpassword}}
+  mysql_user: name=root password={{dbpassword}} state=present check_implicit_admin=yes login_user=root login_password={{dbpassword}}
