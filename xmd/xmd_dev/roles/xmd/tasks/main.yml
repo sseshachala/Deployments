@@ -2,7 +2,7 @@
 - name: Verify or Create user
   user: name={{omd_user}} home={{omd_user_folder}} group={{omd_user}}
 
-- name: Download omd sources:
+- name: Download omd sources
   get_url: url=http://files.omdistro.org/releases/debian_ubuntu/omd-1.00_0.quantal_amd64.deb dest=/omd/omd-1.00_0.quantal_amd64.deb
 
 - name: Install amd package
@@ -62,5 +62,5 @@
     - skel/etc/pnp4nagios/process_perfdata.cfg
     - lib/pnp4nagios/process_perfdata.pl
 
-- Change Permission graphios
+- name: Change Permission graphios
   file: path=/omd/workspace/MonitoringAPI/graphios/skel/etc/init.d/graphios mode=755

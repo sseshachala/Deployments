@@ -7,7 +7,7 @@
 
 - name: Install Various libs
   apt: pkg={{ item }}
-  with-items:
+  with_items:
     - wget
     - libsnmp-perl 
     - libreadline5 
