@@ -1,7 +1,7 @@
 ---
 
-omd_user: omd
-omd_user_folder: /omd
+omd_group: omd
+omd_folder: /omd
 
 dbpassword: mysqlroot
 
