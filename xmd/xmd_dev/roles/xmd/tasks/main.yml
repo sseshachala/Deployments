@@ -45,7 +45,7 @@
   git: repo=ssh://git@github.com/sseshachala/collectd_config.git dest=/omd/workspace/collectd_config
 
 - name: Install graphite
-  shell: /omd/workspace/collectd_config/installer/install.sh graphite chdir=/omd/workspace/collectd_config/installer
+  shell: /omd/workspace/collectd_config/installer/install.sh graphite || /bin/true chdir=/omd/workspace/collectd_config/installer executable=/bin/bash
 
 - name: Create symlinks for graphite
   file: src=/omd/workspace/MonitoringAPI/graphios/{{item}} dest=/omd/versions/default/{{item}} state=link
