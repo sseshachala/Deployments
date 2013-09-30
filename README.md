@@ -7,7 +7,7 @@ Builds a Deployment Framework for Cloud.
 Install
 =======
 ```
- sudo apt-get install python-setuptools python-dev build-essential git
+ sudo apt-get install python-setuptools python-dev build-essential git sshpass
  sudo easy_install pip
  sudo pip install --upgrade virtualenv 
 ```
