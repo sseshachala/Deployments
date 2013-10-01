@@ -7,7 +7,12 @@
     - config
 
 - name: Download omd sources
-  get_url: url=http://files.omdistro.org/releases/debian_ubuntu/omd-1.00_0.{{ ansible_distribution_release }}_{{ ansible_userspace_architecture}}.deb dest=/tmp/omd-1.00_0.deb
+  get_url: url=http://files.omdistro.org/releases/debian_ubuntu/omd-1.00_0.{{ ansible_distribution_release }}_amd64.deb dest=/tmp/omd-1.00_0.deb
+  when: ansible_userpsace_architecture == "x86_64"
+
+- name: Download omd sources
+  get_url: url=http://files.omdistro.org/releases/debian_ubuntu/omd-1.00_0.{{ ansible_distribution_release }}_i386.deb dest=/tmp/omd-1.00_0.deb
+  when: ansible_userpsace_architecture == "i386"
 
 - name: Install omd package
   command: dpkg -i /tmp/omd-1.00_0.deb
