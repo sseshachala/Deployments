@@ -15,7 +15,7 @@
   when: ansible_userspace_architecture == "i386"
 
 - name: Install omd package
-  command: dpkg -i /tmp/omd-1.00_0.deb
+  command: gdebi -n /tmp/omd-1.00_0.deb
 
 - name: Enable apache module
   command: a2enmod proxy_http
