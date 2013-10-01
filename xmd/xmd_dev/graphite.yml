@@ -1,0 +1,8 @@
+---
+- name: Install graphios
+  hosts: all
+  user: root
+  roles:
+    - common
+    - graphios
+

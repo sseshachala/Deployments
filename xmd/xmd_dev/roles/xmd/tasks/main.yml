@@ -46,36 +46,3 @@
   # file: path=/omd/versions/default/skel/var/log/omd-agent-installer/omd-agent-installer.log state=touch
   copy: src=empty dest=/omd/versions/default/skel/var/log/omd-agent-installer/omd-agent-installer.log
 
-- name: Clone Collectd config
-  git: repo=ssh://git@github.com/sseshachala/collectd_config.git dest=/omd/workspace/collectd_config
-
-- name: Install graphite
-  shell: /omd/workspace/collectd_config/installer/install.sh graphite || /bin/true chdir=/omd/workspace/collectd_config/installer executable=/bin/bash
-
-# - name: Create symlinks for graphite
-#   file: src=/omd/workspace/MonitoringAPI/graphios/{{item}} dest=/omd/versions/default/{{item}} state=link
-#   with_items:
-#     - bin/graphios_site_migrate.py
-#     - bin/graphios.py
-#     - skel/etc/graphios
-#     - skel/etc/init.d/graphios
-
-# - name: More symlink
-#   file: src=/omd/versions/default/skel/etc/init.d/graphios dest=/omd/versions/default/skel/etc/rc.d/98-graphios state=link
-
-- name: Remove files
-  file: path=/omd/versions/default/{{ item }} state=absent
-  with_items:
-    - share/omd/skel.permissions
-    - skel/etc/pnp4nagios/process_perfdata.cfg
-    - lib/pnp4nagios/process_perfdata.pl
-
-- name: More symlinkng
-  file: src=/omd/workspace/MonitoringAPI/graphios/{{ item }} dest=/omd/versions/default/{{item}} state=link
-  with_items:
-    - share/omd/skel.permissions
-    - skel/etc/pnp4nagios/process_perfdata.cfg
-    - lib/pnp4nagios/process_perfdata.pl
-
-- name: Change Permission graphios
-  file: path=/omd/workspace/MonitoringAPI/graphios/skel/etc/init.d/graphios mode=755
