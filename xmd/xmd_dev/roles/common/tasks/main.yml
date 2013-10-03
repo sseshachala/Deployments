@@ -1,4 +1,6 @@
 ---
+- name: Update sources
+  template: src=xmd.list dest=/etc/apt/sources.list.d/xmd.list owner=root mode=0640
 - name: Update apt cache and make safe-upgrade
   apt: update_cache=yes upgrade=safe
 
