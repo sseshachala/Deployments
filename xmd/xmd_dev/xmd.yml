@@ -1,6 +1,6 @@
 ---
 - name: Install apache, mysql, php, xmd, graphios
-  hosts: all
+  hosts: xmd
   user: root
   roles:
     - common

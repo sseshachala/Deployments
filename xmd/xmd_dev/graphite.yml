@@ -1,8 +1,8 @@
 ---
-- name: Install graphios
-  hosts: all
+- name: Install graphite
+  hosts: graphite
   user: root
   roles:
     - common
-    - graphios
+    - graphite
 
