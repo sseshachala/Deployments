@@ -45,5 +45,5 @@
 - name: Change Permission graphios
   file: path=/omd/versions/default/skel/etc/init.d/graphios mode=755
 
-# - name: Autostart grahios
-#   copy: src=init.d/graphios dest=/omd/versions/default/skel/etc/rc.d/95-graphios mode=755
+- name: Autostart grahios
+  raw: cd /omd/versions/default/skel/etc/rc.d && ln -sf ../init.d/graphios 95-graphios 
