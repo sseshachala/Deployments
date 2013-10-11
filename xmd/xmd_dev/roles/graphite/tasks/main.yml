@@ -1,11 +1,4 @@
 ---
-- name: Copy ssh keys and config
-  copy: src={{ item }} dest=/root/.ssh/{{ item }} owner=root mode=0600
-  with_items:
-    - github_key
-    - github_key.pub
-    - config
-
 - name: Create workspace directory
   file: path=/omd/workspace state=directory
 
@@ -15,30 +8,9 @@
 - name: Install graphite
   shell: /omd/workspace/collectd_config/installer/install.sh graphite || /bin/true chdir=/omd/workspace/collectd_config/installer executable=/bin/bash
 
-- name: Create symlinks for graphite
-  file: src=/omd/workspace/MonitoringAPI/graphios/{{item}} dest=/omd/versions/default/{{item}} state=link
-  with_items:
-    - bin/graphios_site_migrate.py
-    - bin/graphios.py
-    - skel/etc/graphios
-    - skel/etc/init.d/graphios
+- name: Copy carbon conf file
+  template: src=carbon.conf.example dest=/opt/graphite/conf/carbon.conf
+  notify:
+    - restart carbon-cache
 
-- name: More symlink
-  file: src=/omd/versions/default/skel/etc/init.d/graphios dest=/omd/versions/default/skel/etc/rc.d/98-graphios state=link
 
-- name: Remove files
-  file: path=/omd/versions/default/{{ item }} state=absent
-  with_items:
-    - share/omd/skel.permissions
-    - skel/etc/pnp4nagios/process_perfdata.cfg
-    - lib/pnp4nagios/process_perfdata.pl
-
-- name: More symlinkng
-  file: src=/omd/workspace/MonitoringAPI/graphios/{{ item }} dest=/omd/versions/default/{{item}} state=link
-  with_items:
-    - share/omd/skel.permissions
-    - skel/etc/pnp4nagios/process_perfdata.cfg
-    - lib/pnp4nagios/process_perfdata.pl
-
-- name: Change Permission graphios
-  file: path=/omd/workspace/MonitoringAPI/graphios/skel/etc/init.d/graphios mode=755

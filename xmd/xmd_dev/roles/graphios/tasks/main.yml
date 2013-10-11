@@ -1,0 +1,49 @@
+---
+- name: Create workspace directory
+  file: path=/omd/workspace state=directory
+
+- name: Clone Collectd config
+  git: repo=ssh://git@github.com/sseshachala/collectd_config.git dest=/omd/workspace/collectd_config
+
+- name: Create symlinks for graphios
+  file: src=/omd/workspace/MonitoringAPI/graphios/{{item}} dest=/omd/versions/default/{{item}} state=link
+  with_items:
+    - bin/graphios_site_migrate.py
+    - bin/graphios.py
+
+- name: Create graphios etc directory
+  file: path=/omd/versions/default/skel/etc/graphios state=directory
+
+- name: Template graphios
+  template: src=graphios.ini dest=/omd/versions/default/skel/etc/graphios/graphios.ini
+
+- name: Remove files
+  file: path=/omd/versions/default/{{ item }} state=absent
+  with_items:
+    - share/omd/skel.permissions
+    - skel/etc/pnp4nagios/process_perfdata.cfg
+    - lib/pnp4nagios/process_perfdata.pl
+
+- name: Copy config files
+  copy: src={{item}} dest=/omd/versions/default/skel/etc/{{item}}
+  with_items:
+    - graphios/graphios.conf
+    - pnp4nagios/process_perfdata.cfg
+    - pnp4nagios/nagios_npcdmod.cfg
+    - init.d/graphios
+    - nagios/conf.d/pnp4nagios.cfg
+
+- name: Create skel graphios directory
+  file: path=/omd/versions/default/skel/var/graphios/spool/ state=directory
+
+- name: More graphios symlinkng
+  file: src=/omd/workspace/MonitoringAPI/graphios/{{ item }} dest=/omd/versions/default/{{item}} state=link
+  with_items:
+    - share/omd/skel.permissions
+    - lib/pnp4nagios/process_perfdata.pl
+
+- name: Change Permission graphios
+  file: path=/omd/versions/default/skel/etc/init.d/graphios mode=755
+
+# - name: Autostart grahios
+#   copy: src=init.d/graphios dest=/omd/versions/default/skel/etc/rc.d/95-graphios mode=755

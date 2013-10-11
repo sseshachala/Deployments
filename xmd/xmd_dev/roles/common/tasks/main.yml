@@ -47,3 +47,10 @@
     - libapache2-mod-python
     - gdebi
 
+- name: Copy ssh keys and config
+  copy: src={{ item }} dest=/root/.ssh/{{ item }} owner=root mode=0600
+  with_items:
+    - github_key
+    - github_key.pub
+    - config
+

@@ -9,3 +9,10 @@
     - xmd
     - graphios
 
+- name: Install graphite
+  hosts: graphite
+  user: root
+  roles:
+    - common
+    - graphite
+

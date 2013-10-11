@@ -1,8 +1,0 @@
-Host github.com
-	Hostname github.com
-	User git
-	IdentityFile ~/.ssh/github_key
-
-StrictHostKeyChecking no 
-UserKnownHostsFile /dev/null
-

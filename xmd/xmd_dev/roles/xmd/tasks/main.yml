@@ -1,11 +1,4 @@
 ---
-- name: Copy ssh keys and config
-  copy: src={{ item }} dest=/root/.ssh/{{ item }} owner=root mode=0600
-  with_items:
-    - github_key
-    - github_key.pub
-    - config
-
 - name: Download omd sources
   get_url: url=http://files.omdistro.org/releases/debian_ubuntu/omd-1.00_0.{{ ansible_distribution_release }}_amd64.deb dest=/tmp/omd-1.00_0.deb
   when: ansible_userspace_architecture == "x86_64"
@@ -34,9 +27,20 @@
   file: src=/omd/workspace/MonitoringAPI/xervrest/{{item}} dest=/omd/versions/default/{{item}} state=link
   with_items:
     - share/xervrest
-    - skel/etc/xervrest
-    - skel/etc/apache/conf.d/0xervrest.conf
     - bin/install_omd_agent.py
+
+- name: Create config directory for xerverst
+  file: path=/omd/versions/default/skel/etc/{{item}} state=directory
+  with_items:
+    - xervrest
+    - apache/conf.d
+
+- name: Copy config files
+  copy: src={{item}} dest=/omd/versions/default/skel/etc/{{item}}
+  with_items:
+    - xervrest/check_templates.json
+    - xervrest/installer_config.json
+    - apache/conf.d/0xervrest.conf
 
 - name: Create log omd directory
   file: path=/omd/versions/default/skel/var/log/omd-agent-installer state=directory

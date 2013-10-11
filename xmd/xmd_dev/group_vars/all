@@ -5,5 +5,5 @@ omd_folder: /omd
 
 dbpassword: mysqlroot
 
-carbon_server: 10.204.54.80
-carbon_port: 2004
+carbon_server: 162.243.36.170
+carbon_port: 7887
