@@ -18,8 +18,9 @@ cd xmd_dev
 Deploying all
 =============
 
-Hosts file and vars in group_vars/all should be configured
-After use command for installing both:
+Hosts file in hosts file should be configured. Please note different host groups in the file. Also vars in group_vars/all should be configured.
+
+After it you can use command for installing both:
 
 ```
 ansible-playbook deploy.yml -i hosts -u root -k 
