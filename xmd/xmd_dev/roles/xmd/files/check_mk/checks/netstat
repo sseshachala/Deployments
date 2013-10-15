@@ -1,0 +1,19 @@
+def check_netstat_ports(item, params, info):
+    result = []
+    for line in info:
+        protocol, address, process = line[0].split(',')
+        s = address.rindex(':')
+        ip, port = address[:s], address[s+1:]
+        pid, process_name = process.split('/')
+        result.append((
+            protocol, ip, port, pid, process_name
+        ))
+    return (0, 'Found %d open ports' % len(result), result)
+    
+
+
+check_info['netstat.ports'] = {
+    'check_function': check_netstat_ports,
+    'has_perfdata': True,
+    'service_description': 'Open ports'
+}

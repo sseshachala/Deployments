@@ -1,0 +1,12 @@
+def check_nproc(item, params, info):
+    num = info[0][0]
+    return (0, 'Found %d cores' % len(num), [('cores', num)])
+    
+
+
+check_info['nproc'] = {
+    'check_function': check_nproc,
+    'has_perfdata': True,
+    'service_description': 'Number of cores'
+}
+    

@@ -1,0 +1,26 @@
+def parse_uname(line):
+    """
+    KERNEL_NAME NODENAME KERNEL_RELEASE KERNEL_VERSION MACHINE PROCESSOR PLATFORM OS
+    """
+    line = [l[0] for l in line]
+    result = {}
+    result['kernel_name'] = line[0]
+    result['nodename'] = line[1]
+    result['kernel_release'] = line[2]
+    result['kernel_version'] = line[3]
+    result['machine'] = line[4]
+    result['processor'] = None if line[5] is None else line[5]
+    result['platform'] = None if line[6] is None else line[6]
+    result['os'] = line[7]
+    return result
+    
+def check_arch(item, params, info):
+    vals = parse_uname(info)
+    return (0, "Servers architecture is %s" % vals['machine'], [('Arch', vals['machine'])])
+
+
+check_info['uname.arch'] = {
+    'check_function': check_arch,
+    'has_perfdata': True,
+    'service_description': 'System architecture'
+}
