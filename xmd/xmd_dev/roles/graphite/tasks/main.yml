@@ -12,5 +12,6 @@
   template: src=carbon.conf.example dest=/opt/graphite/conf/carbon.conf
   notify:
     - restart carbon-cache
+    - restart apache
 
 
