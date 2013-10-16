@@ -28,8 +28,8 @@
 #   LOG_DIR        = /var/log/carbon/
 #   PID_DIR        = /var/run/
 #
-STORAGE_DIR    = #STORAGE_DIR#
-LOCAL_DATA_DIR = #LOCAL_DATA_DIR#
+STORAGE_DIR    = /vol/graphite
+LOCAL_DATA_DIR = /vol/graphite/whisper
 
 # Specify the user to drop privileges to
 # If this is blank carbon runs as the user that invokes it
