@@ -9,7 +9,10 @@
   shell: /omd/workspace/collectd_config/installer/install.sh graphite || /bin/true chdir=/omd/workspace/collectd_config/installer executable=/bin/bash
 
 - name: Copy carbon conf file
-  template: src=carbon.conf.example dest=/opt/graphite/conf/carbon.conf
+  template: src={{ item }}.example dest=/opt/graphite/conf/{{ item }}
+  with_items:
+    - carbon.conf
+    - whitelist.conf
   notify:
     - restart carbon-cache
     - restart apache

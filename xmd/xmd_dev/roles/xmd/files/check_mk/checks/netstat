@@ -6,7 +6,7 @@ def check_netstat_ports(item, params, info):
         ip, port = address[:s], address[s+1:]
         pid, process_name = process.split('/')
         result.append((
-            protocol, ip, port, pid, process_name
+            'item', protocol, ip, port, pid, process_name
         ))
     return (0, 'Found %d open ports' % len(result), result)
     
