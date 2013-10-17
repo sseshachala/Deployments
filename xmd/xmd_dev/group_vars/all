@@ -7,3 +7,6 @@ dbpassword: mysqlroot
 
 carbon_server: 162.243.36.170
 carbon_port: 7887
+
+# from install.sh in collectd_config
+graphite_dir: /vol/graphite
