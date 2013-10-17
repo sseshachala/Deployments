@@ -12,7 +12,6 @@
   template: src={{ item }}.example dest=/opt/graphite/conf/{{ item }}
   with_items:
     - carbon.conf
-    - whitelist.conf
   notify:
     - restart carbon-cache
     - restart apache
