@@ -1,0 +1,27 @@
+---
+- name: Create workspace directory
+  file: path=/omd/workspace state=directory
+
+- name: Create run dir
+  file: path=/omd/versions/default/skel/var/run state=directory
+
+- name: Install gunicorn
+  pip: name=gunicorn
+
+- name: Clone repo 
+  git: repo=ssh://git@github.com/sseshachala/MonitoringAPI.git dest=/omd/workspace/MonitoringAPI
+
+- name: Create symlinks for api
+  file: src=/omd/workspace/MonitoringAPI/xervpyapi dest=/omd/versions/default/share/xervpyapi state=link
+
+- name: Create xervpyapi etc directory
+  file: path=/omd/versions/default/skel/etc/xervpyapi state=directory
+
+- name: Template graphios
+  template: src=xervapi.conf dest=/omd/versions/default/skel/etc/xervpyapi/xervpyapi.conf
+
+- name: Change Permission xervpyapi
+  file: path=/omd/versions/default/skel/etc/init.d/xervpyapi mode=755
+
+- name: Autostart xervpyapi
+  raw: cd /omd/versions/default/skel/etc/rc.d && ln -sf ../init.d/xervpyapi 95-xervpyapi 

@@ -56,3 +56,14 @@
     - netstat
     - nproc
     - uname
+
+- name: Create Wato directory
+  file: path=/omd/versions/default/skel/etc/check_mk/conf.d/wato state=directory
+
+- name: Copy config for email variables
+  copy: src={{item}} dest=/omd/versions/default/skel/etc/{{item}}
+  with_items:
+    - check_mk/conf.d/wato/global.mk
+
+- name: Change xmd creation script for proper email vars
+  raw: sed -i "s/OMD site/XMD site/g" /omd/versions/default/bin/omd
