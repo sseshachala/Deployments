@@ -5,10 +5,10 @@ omd_folder: /omd
 
 dbpassword: mysqlroot
 
-carbon_server: 162.243.36.170
+carbon_server: 162.243.147.17
 carbon_port: 7887
 
-xmd_server: 162.243.142.224
+xmd_server: 162.243.121.166
 
 # from install.sh in collectd_config
 graphite_dir: /vol/graphite

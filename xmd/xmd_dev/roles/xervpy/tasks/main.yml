@@ -14,14 +14,22 @@
 - name: Create symlinks for api
   file: src=/omd/workspace/MonitoringAPI/xervpyapi dest=/omd/versions/default/share/xervpyapi state=link
 
+
 - name: Create xervpyapi etc directory
+  # not change depends on omd bin script
   file: path=/omd/versions/default/skel/etc/xervpyapi state=directory
 
-- name: Template graphios
-  template: src=xervapi.conf dest=/omd/versions/default/skel/etc/xervpyapi/xervpyapi.conf
+- name: Copy api config
+  file: src=/omd/workspace/MonitoringAPI/xervpyapi/default_config dest=/omd/versions/default/skel/etc/xervpyapi/xervpyapi.conf
+
+- name: Copy api init script
+  file: src=/omd/workspace/MonitoringAPI/xervpyapi/init.d/xervpyapi dest=/omd/versions/default/skel/etc/init.d/xervpyapi
 
 - name: Change Permission xervpyapi
   file: path=/omd/versions/default/skel/etc/init.d/xervpyapi mode=755
 
 - name: Autostart xervpyapi
   raw: cd /omd/versions/default/skel/etc/rc.d && ln -sf ../init.d/xervpyapi 95-xervpyapi 
+
+- name: Replace omd in bin for generating apache config
+  file: src=omd dest=/omd/versions/default/bin/omd
