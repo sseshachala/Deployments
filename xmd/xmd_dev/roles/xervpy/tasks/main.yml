@@ -5,11 +5,17 @@
 - name: Create run dir
   file: path=/omd/versions/default/skel/var/run state=directory
 
+- name: Install pip
+  apt: pkg=python-pip
+
 - name: Install gunicorn
-  pip: name=gunicorn
+  pip: name={{ item }}
+  with_items:
+    - pip
+    - gunicorn
 
 - name: Clone repo 
-  git: repo=ssh://git@github.com/sseshachala/MonitoringAPI.git dest=/omd/workspace/MonitoringAPI
+  git: repo=ssh://git@github.com/sseshachala/MonitoringAPI.git dest=/omd/workspace/MonitoringAPI version=develop
 
 - name: Create symlinks for api
   file: src=/omd/workspace/MonitoringAPI/xervpyapi dest=/omd/versions/default/share/xervpyapi state=link
@@ -20,10 +26,10 @@
   file: path=/omd/versions/default/skel/etc/xervpyapi state=directory
 
 - name: Copy api config
-  file: src=/omd/workspace/MonitoringAPI/xervpyapi/default_config dest=/omd/versions/default/skel/etc/xervpyapi/xervpyapi.conf
+  copy: src=xervpy_config dest=/omd/versions/default/skel/etc/xervpyapi/xervpyapi.conf
 
 - name: Copy api init script
-  file: src=/omd/workspace/MonitoringAPI/xervpyapi/init.d/xervpyapi dest=/omd/versions/default/skel/etc/init.d/xervpyapi
+  copy: src=init.d/xervpyapi dest=/omd/versions/default/skel/etc/init.d/xervpyapi
 
 - name: Change Permission xervpyapi
   file: path=/omd/versions/default/skel/etc/init.d/xervpyapi mode=755
@@ -32,4 +38,4 @@
   raw: cd /omd/versions/default/skel/etc/rc.d && ln -sf ../init.d/xervpyapi 95-xervpyapi 
 
 - name: Replace omd in bin for generating apache config
-  file: src=omd dest=/omd/versions/default/bin/omd
+  copy: src=omd dest=/omd/versions/default/bin/omd

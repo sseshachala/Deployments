@@ -3,10 +3,10 @@
   hosts: xmd
   user: root
   roles:
-    - common
-    - web
-    - db
-    - xmd
-    - graphios
+    # - common
+    # - web
+    # - db
+    # - xmd
+    # - graphios
     - xervpy
 
