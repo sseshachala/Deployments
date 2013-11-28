@@ -20,6 +20,8 @@
 - name: Create symlinks for api
   file: src=/omd/workspace/MonitoringAPI/xervpyapi dest=/omd/versions/default/share/xervpyapi state=link
 
+- name: Install api requirements
+  pip: requirements=/omd/workspace/MonitoringAPI/xervpyapi/requirements.txt
 
 - name: Create xervpyapi etc directory
   # not change depends on omd bin script
@@ -31,8 +33,8 @@
 - name: Copy api init script
   copy: src=init.d/xervpyapi dest=/omd/versions/default/skel/etc/init.d/xervpyapi
 
-- name: Change Permission xervpyapi
-  file: path=/omd/versions/default/skel/etc/init.d/xervpyapi mode=755
+- name: Add graphios permission line 
+  lineinfile: dest=/omd/versions/default/share/omd/skel.permissions line="etc/init.d/xervpyapi 0755" insertafter="EOF" regexp="^etc\/init\.d\/xervpyapi"
 
 - name: Autostart xervpyapi
   raw: cd /omd/versions/default/skel/etc/rc.d && ln -sf ../init.d/xervpyapi 95-xervpyapi 

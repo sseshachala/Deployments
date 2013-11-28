@@ -1,15 +1,14 @@
-#!/bin/sh
+#!/bin/bash
  
 ADDRESS='127.0.0.1'
 PYTHON="/usr/bin/python"
 GUNICORN="/usr/local/bin/gunicorn"
 PROJECTLOC="###ROOT###/share/xervpyapi"
-MANAGELOC="$PROJECTLOC/manage.py"
 DEFAULT_ARGS="app:app --workers=1 --daemon --bind=$ADDRESS:"
 BASE_CMD="$GUNICORN $DEFAULT_ARGS"
  
 SERVER_PORT=`cat ###ROOT###/etc/xervpyapi/app_port`
-SERVER_PID="###ROOT###/tmp/xervpyapi.pid"
+SERVER_PID="###ROOT###/var/run/xervpyapi.pid"
  
 
 start_server () {

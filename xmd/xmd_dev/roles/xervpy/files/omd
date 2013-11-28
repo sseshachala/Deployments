@@ -874,15 +874,15 @@ def add_xervpy_apache(sitename):
     """
 
     xervpy_ports = '/omd/versions/default/tmp/xervpy_ports'
-    apache_config = '%s/etc/apache/conf.d/xervpy.conf' % sitename
-    xervpy_dir = '%s/etc/xervpyapi' % sitename
+    apache_config = '/omd/sites/%s/etc/apache/conf.d/xervpy.conf' % sitename
+    xervpy_dir = '/omd/sites/%s/etc/xervpyapi' % sitename
     xervpy_apache_conf = '''
     LoadModule proxy_module /usr/lib/apache2/modules/mod_proxy.so
     LoadModule proxy_http_module /usr/lib/apache2/modules/mod_proxy_http.so
     ProxyRequests Off
     ProxyPreserveHost On
 
-    <Location "/test2/xervpyapi/">
+    <Location "/{sitename}/xervpyapi/">
     ProxyPass http://127.0.0.1:{port}/
     ProxyPassReverse http://127.0.0.1:{port}/
     Order allow,deny
@@ -900,8 +900,7 @@ def add_xervpy_apache(sitename):
     new_port = str(available_ports.pop())
     with open(xervpy_ports, 'a') as fp:
         fp.write(new_port + '\n')
-    config = xervpy_apache_conf.format(port=new_port)
-    print config
+    config = xervpy_apache_conf.format(port=new_port, sitename=sitename)
     with open(apache_config, 'w') as fp:
         fp.write(config)
     with open(os.path.join(xervpy_dir, 'app_port'), 'w') as fp:

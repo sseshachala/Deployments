@@ -20,9 +20,11 @@
 - name: Remove files
   file: path=/omd/versions/default/{{ item }} state=absent
   with_items:
-    - share/omd/skel.permissions
     - skel/etc/pnp4nagios/process_perfdata.cfg
     - lib/pnp4nagios/process_perfdata.pl
+
+- name: Add graphios permission line 
+  lineinfile: dest=/omd/versions/default/share/omd/skel.permissions line="etc/init.d/graphios 0755" insertafter="EOF" regexp="^etc\/init\.d\/graphios"
 
 - name: Copy config files
   copy: src={{item}} dest=/omd/versions/default/skel/etc/{{item}}
@@ -39,11 +41,7 @@
 - name: More graphios symlinkng
   file: src=/omd/workspace/MonitoringAPI/graphios/{{ item }} dest=/omd/versions/default/{{item}} state=link
   with_items:
-    - share/omd/skel.permissions
     - lib/pnp4nagios/process_perfdata.pl
-
-- name: Change Permission graphios
-  file: path=/omd/versions/default/skel/etc/init.d/graphios mode=755
 
 - name: Autostart grahios
   raw: cd /omd/versions/default/skel/etc/rc.d && ln -sf ../init.d/graphios 95-graphios 
